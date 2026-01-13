@@ -1,4 +1,4 @@
--- p05.sql
+-- p04.sql
 
 SELECT * FROM userinfo;
 
