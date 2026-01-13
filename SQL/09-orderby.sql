@@ -1,4 +1,4 @@
--- 08-orderby.sql
+-- 09-orderby.sql
 -- 특정 컬럼을 기준으로 정렬한다.
 -- ASC 오름차순 | DESC 내림차순
 
