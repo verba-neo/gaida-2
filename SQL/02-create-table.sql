@@ -11,7 +11,7 @@ DROP TABLE sample;
 -- members 테이블을 생성
 CREATE TABLE members (
 	-- 자동으로 1씩 올라가고, 해당 테이블의 PK 
-	id 			INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+	id 			INT GENERATED ALWAYS AS IDENTITY,
 	-- 비어있지 않게 (Null)
 	name 		VARCHAR(30) NOT NULL,
 	-- 중복 허용하지 않게
