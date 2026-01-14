@@ -88,5 +88,3 @@ GROUP BY
     EXTRACT(DOW FROM order_date)
 ORDER BY 총매출액 DESC;
 
-
-
