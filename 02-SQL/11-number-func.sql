@@ -16,7 +16,7 @@ SELECT
     10 - 5 AS minus,
     10 * 5 AS multiply,
     10 / 5 AS divide,
-    10 / 3 AS 몫,
+    10.0 / 3 AS 몫,
     10 % 3 AS 나머지,
     POWER(10, 3) AS 거듭제곱,
     SQRT(16) AS 루트,
