@@ -5,7 +5,7 @@
 SELECT * FROM students;
 
 -- 이름 ㄱㄴㄷ 순 정렬
-SELECT * FROM students ORDER BY name;
+SELECT * FROM sAtudents ORDER BY name;
 SELECT * FROM students ORDER BY name ASC;  -- 기본값
 SELECT * FROM students ORDER BY name DESC; -- 내림차순
 
