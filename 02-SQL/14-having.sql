@@ -50,7 +50,7 @@ SELECT
     SUM(total_amount) AS 총매출,
     COUNT(DISTINCT TO_CHAR(order_date, 'yyyy-mm')) AS 활동개월수,
     -- 정수->실수 / 정수 => 실수
-    SUM(total_amount)::NUMERIC / COUNT(DISTINCT TO_CHAR(order_date, 'yyyy-mm')) AS 월평균매출
+    SUM(total_amount)::DECIMAL / COUNT(DISTINCT TO_CHAR(order_date, 'yyyy-mm')) AS 월평균매출
 FROM sales
 GROUP BY sales_rep
 HAVING 
