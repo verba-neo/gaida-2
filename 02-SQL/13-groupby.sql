@@ -49,12 +49,44 @@ GROUP BY sales_rep, region
 ORDER BY 총매출액 DESC;
 
 -- 영업사원별-월별 매출 분석
+-- 월, 사원, 주문건수, 월매출액, 평균매출액
+-- 월, 월매출액 순으로 정렬
 SELECT
     TO_CHAR(order_date, 'YYYY-MM') AS 월,
     sales_rep AS 사원,
-    COUNT(*) AS 주문건수
+    COUNT(*) AS 주문건수,
+    SUM(total_amount) AS 월매출액,
+    ROUND(AVG(total_amount), 2) AS 평균매출액
 FROM sales
 GROUP BY 
     sales_rep,
-    TO_CHAR(order_date, 'YYYY-MM');
+    TO_CHAR(order_date, 'YYYY-MM')
+ORDER BY 월, 월매출액 DESC;
+
+-- MAU(Monthly Active User) -> 월간활성고객
+-- 월, 주문건수, 월매출액, MAU
+SELECT
+    TO_CHAR(order_date, 'YYYY-MM') AS 월,
+    COUNT(*) AS 주문건수,
+    SUM(total_amount) AS 월매출액,
+    COUNT(DISTINCT customer_id) AS mau
+FROM sales
+GROUP BY TO_CHAR(order_date, 'YYYY-MM')
+ORDER BY 월;
+
+-- 요일별 매출 패턴 (날짜->요일 함수?)
+-- 요일, 주문건수, 총매출, 평균매출
+SELECT
+    TO_CHAR(order_date, 'Day') AS 요일,
+    EXTRACT(DOW FROM order_date) AS 요일번호,  -- 0(일) ~ 6(토)
+    COUNT(*) AS 주문건수,
+    SUM(total_amount) AS 총매출액,
+    ROUND(AVG(total_amount), 2) AS 평균매출액
+FROM sales
+GROUP BY 
+    TO_CHAR(order_date, 'Day'),
+    EXTRACT(DOW FROM order_date)
+ORDER BY 총매출액 DESC;
+
+
 
