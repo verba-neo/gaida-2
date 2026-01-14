@@ -52,7 +52,3 @@ SELECT
     MAX(total_amount) AS 최대매출액,
     ROUND(AVG(quantity), 2) AS 평균수량 -- ROUND(x, 1) -> 소숫점 1자리 반올림
 FROM sales
-
-
-
-    

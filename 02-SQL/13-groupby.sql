@@ -87,4 +87,3 @@ GROUP BY
     TO_CHAR(order_date, 'Day'),
     EXTRACT(DOW FROM order_date)
 ORDER BY 총매출액 DESC;
-

@@ -56,16 +56,3 @@ GROUP BY sales_rep
 HAVING 
     SUM(total_amount)::NUMERIC / COUNT(DISTINCT TO_CHAR(order_date, 'yyyy-mm')) >= 1300000
 ORDER BY 월평균매출 DESC;
-
-
-
-
-
-
-
-
-
-
-
-
-
