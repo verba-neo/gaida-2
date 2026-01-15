@@ -15,7 +15,17 @@ SELECT customer_id FROM customers WHERE customer_type='VIP';
 
 SELECT * FROM sales 
 WHERE customer_id 
-IN (SELECT customer_id FROM customers WHERE customer_type='VIP');
+-- IN ("C001","C005","C010","C013","C025","C026","C028","C029","C037","C040")
+IN (SELECT customer_id, FROM customers WHERE customer_type='VIP');
 
 
+-- [전자 제품을 구매한 고객들의 customer_id] 의 모든 주문
+
+SELECT DISTINCT customer_id FROM sales WHERE category='전자제품';  -- customer_id
+
+SELECT * FROM sales
+WHERE customer_id IN (
+    SELECT DISTINCT customer_id 
+    FROM sales WHERE category='전자제품'
+);
 
