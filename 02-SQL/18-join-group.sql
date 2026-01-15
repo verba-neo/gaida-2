@@ -33,7 +33,7 @@ SELECT
     CASE
         WHEN COUNT(s.id) = 0   THEN '잠재고객'
         WHEN COUNT(s.id) >= 5  THEN '충성고객'
-        WHEN COUNT(s.id) >= 2 THEN '일반고객'
+        WHEN COUNT(s.id) >= 2  THEN '일반고객'
         ELSE '신규고객'
     END AS 고객분류
 FROM customers c
