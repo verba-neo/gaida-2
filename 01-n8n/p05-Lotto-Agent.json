@@ -57,60 +57,6 @@
     },
     {
       "parameters": {
-        "url": "https://www.dhlottery.co.kr/lt645/selectPstLt645Info.do",
-        "sendQuery": true,
-        "queryParameters": {
-          "parameters": [
-            {
-              "name": "srchStrLtEpsd",
-              "value": "1200"
-            },
-            {
-              "name": "srchEndLtEpsd",
-              "value": "1200"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.3,
-      "position": [
-        464,
-        -320
-      ],
-      "id": "70d1436c-c66f-41ed-b9c8-4aa10c79ea14",
-      "name": "Fetch-단일회차"
-    },
-    {
-      "parameters": {
-        "url": "https://www.dhlottery.co.kr/lt645/selectPstLt645Info.do",
-        "sendQuery": true,
-        "queryParameters": {
-          "parameters": [
-            {
-              "name": "srchStrLtEpsd",
-              "value": "1"
-            },
-            {
-              "name": "srchEndLtEpsd",
-              "value": "10"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.3,
-      "position": [
-        288,
-        -320
-      ],
-      "id": "ecc6b8ab-05d1-4594-a0ec-42c8bfa62944",
-      "name": "Fetch-범위"
-    },
-    {
-      "parameters": {
         "schema": {
           "__rl": true,
           "mode": "list",
@@ -125,18 +71,19 @@
         "columns": {
           "mappingMode": "defineBelow",
           "value": {
-            "draw_round": 0,
-            "win_num_1": 0,
-            "win_num_2": 0,
-            "win_num_3": 0,
-            "win_num_4": 0,
-            "win_num_5": 0,
-            "win_num_6": 0,
-            "bonus_num": 0,
-            "first_prize_winners": 0,
-            "first_prize_amount": 0,
-            "second_prize_winners": 0,
-            "second_prize_amount": 0
+            "draw_round": "={{ $json.ltEpsd }}",
+            "win_num_1": "={{ $json.tm1WnNo }}",
+            "win_num_2": "={{ $json.tm2WnNo }}",
+            "win_num_3": "={{ $json.tm3WnNo }}",
+            "win_num_4": "={{ $json.tm4WnNo }}",
+            "win_num_5": "={{ $json.tm5WnNo }}",
+            "win_num_6": "={{ $json.tm6WnNo }}",
+            "bonus_num": "={{ $json.bnsWnNo }}",
+            "first_prize_winners": "={{ $json.rnk1WnNope }}",
+            "first_prize_amount": "={{ $json.rnk1WnAmt }}",
+            "second_prize_winners": "={{ $json.rnk2WnNope }}",
+            "second_prize_amount": "={{ $json.rnk2WnAmt }}",
+            "draw_date": "={{ $json.ltRflYmd }}"
           },
           "matchingColumns": [],
           "schema": [
@@ -266,8 +213,8 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        -112,
-        -352
+        160,
+        528
       ],
       "id": "7e459ae7-989c-4495-b5f7-c24643da06c8",
       "name": "로또 정보 생성",
@@ -317,20 +264,6 @@
           "name": "db-lecture"
         }
       }
-    },
-    {
-      "parameters": {
-        "url": "https://www.dhlottery.co.kr/lt645/selectPstLt645Info.do",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.3,
-      "position": [
-        144,
-        -384
-      ],
-      "id": "e1ff72c6-9b52-4f68-9af6-607f23ecb2ab",
-      "name": "Fetch-최신회차1"
     },
     {
       "parameters": {
@@ -515,18 +448,86 @@
     },
     {
       "parameters": {
-        "content": "로또 데이터 가져오는 워크플로우\n\n",
+        "content": "로또 데이터 가져오는 워크플로우\n\n1. 정확히 항상 사용자가 원하는 회차만 찍어서 가져온다.\n\n2. 사용자가 원하는 회차가 연속 범위가 아니라도, 우선 가져오고 DB에 다 넣는다.\n1100 1102 1104 1106 -> 1100 ~ 1106 다 가져와서 저장함\n\n800",
         "height": 384,
         "width": 544
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        -192,
-        368
+        -208,
+        320
       ],
       "typeVersion": 1,
       "id": "a3a22f25-a62e-4980-843d-6d19679d7cb9",
       "name": "Sticky Note4"
+    },
+    {
+      "parameters": {
+        "url": "https://www.dhlottery.co.kr/lt645/selectPstLt645Info.do",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "srchStrLtEpsd",
+              "value": "1"
+            },
+            {
+              "name": "srchEndLtEpsd",
+              "value": "1"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        -176,
+        528
+      ],
+      "id": "5adff727-b93f-45bc-bf51-78186d2c111c",
+      "name": "Fetch-단일회차"
+    },
+    {
+      "parameters": {
+        "url": "https://www.dhlottery.co.kr/lt645/selectPstLt645Info.do",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "srchStrLtEpsd",
+              "value": "1"
+            },
+            {
+              "name": "srchEndLtEpsd",
+              "value": "10"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        -624,
+        336
+      ],
+      "id": "e049bf2c-abeb-4804-ab55-d3add649b541",
+      "name": "Fetch-범위"
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "data.list",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        -16,
+        528
+      ],
+      "id": "bdbc5fc5-4b57-482a-b355-d12d3f54fc9b",
+      "name": "회차 쪼개기"
     }
   ],
   "pinData": {},
@@ -623,13 +624,40 @@
           }
         ]
       ]
+    },
+    "Fetch-단일회차": {
+      "main": [
+        [
+          {
+            "node": "회차 쪼개기",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "회차 쪼개기": {
+      "main": [
+        [
+          {
+            "node": "로또 정보 생성",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "active": false,
   "settings": {
-    "executionOrder": "v1"
+    "executionOrder": "v1",
+    "timeSavedMode": "fixed",
+    "timezone": "Asia/Seoul",
+    "callerPolicy": "workflowsFromSameOwner",
+    "executionTimeout": -1,
+    "availableInMCP": false
   },
-  "versionId": "f606f4f0-acd7-4c83-b22c-e9f81536cf76",
+  "versionId": "1584025d-5a7f-47f5-873d-c00c9b074aae",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "06f57ead87e05f5144d588b72ffcb2b55a96d8ab9c25ae283efe70c0d676b771"
