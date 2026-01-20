@@ -1,0 +1,375 @@
+{
+  "name": "p05-Lotto-Agent",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -848,
+        -48
+      ],
+      "id": "935d7f65-17fc-4ae7-ac48-fe987dab38ca",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "content": "사용자 쿼리\n1. 정보 추출\n- 회차 정보\n- 요구 사항\n2. 필요 정보\n- 오늘 날짜\n- 가장 마지막 추첨 회차 + 날짜\n",
+        "height": 208
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -848,
+        -320
+      ],
+      "typeVersion": 1,
+      "id": "f5192242-e648-402b-bf78-8083811b44aa",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "기능 (API)\n- 최신 회차 GET\n- 특정 단일 회차 GET\n- 범위 회차 GET"
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        64,
+        -384
+      ],
+      "typeVersion": 1,
+      "id": "2e69a319-7296-4686-a008-8536f4988035",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "content": "기능 (DB)\n- 조회(회차로)\n- 생성\n\n"
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -352,
+        -352
+      ],
+      "typeVersion": 1,
+      "id": "16fc6486-52b2-4add-b9a2-e00ea88ba1b5",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "url": "https://www.dhlottery.co.kr/lt645/selectPstLt645Info.do",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        -672,
+        -48
+      ],
+      "id": "be5387af-f44c-4c52-b57c-1a8c4905bb83",
+      "name": "Fetch-최신회차"
+    },
+    {
+      "parameters": {
+        "url": "https://www.dhlottery.co.kr/lt645/selectPstLt645Info.do",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "srchStrLtEpsd",
+              "value": "1200"
+            },
+            {
+              "name": "srchEndLtEpsd",
+              "value": "1200"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        416,
+        -240
+      ],
+      "id": "70d1436c-c66f-41ed-b9c8-4aa10c79ea14",
+      "name": "Fetch-단일회차"
+    },
+    {
+      "parameters": {
+        "url": "https://www.dhlottery.co.kr/lt645/selectPstLt645Info.do",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "srchStrLtEpsd",
+              "value": "1"
+            },
+            {
+              "name": "srchEndLtEpsd",
+              "value": "10"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        288,
+        -320
+      ],
+      "id": "ecc6b8ab-05d1-4594-a0ec-42c8bfa62944",
+      "name": "Fetch-범위"
+    },
+    {
+      "parameters": {
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "lotto_draws",
+          "mode": "list",
+          "cachedResultName": "lotto_draws"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "draw_round": 0,
+            "win_num_1": 0,
+            "win_num_2": 0,
+            "win_num_3": 0,
+            "win_num_4": 0,
+            "win_num_5": 0,
+            "win_num_6": 0,
+            "bonus_num": 0,
+            "first_prize_winners": 0,
+            "first_prize_amount": 0,
+            "second_prize_winners": 0,
+            "second_prize_amount": 0
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "draw_round",
+              "displayName": "draw_round",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "win_num_1",
+              "displayName": "win_num_1",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "win_num_2",
+              "displayName": "win_num_2",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "win_num_3",
+              "displayName": "win_num_3",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "win_num_4",
+              "displayName": "win_num_4",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "win_num_5",
+              "displayName": "win_num_5",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "win_num_6",
+              "displayName": "win_num_6",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "bonus_num",
+              "displayName": "bonus_num",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "draw_date",
+              "displayName": "draw_date",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "first_prize_winners",
+              "displayName": "first_prize_winners",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "first_prize_amount",
+              "displayName": "first_prize_amount",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "second_prize_winners",
+              "displayName": "second_prize_winners",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "second_prize_amount",
+              "displayName": "second_prize_amount",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        -160,
+        -288
+      ],
+      "id": "7e459ae7-989c-4495-b5f7-c24643da06c8",
+      "name": "로또 정보 생성",
+      "credentials": {
+        "postgres": {
+          "id": "kqM566144RNhzlSR",
+          "name": "db-lecture"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "select",
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "lotto_draws",
+          "mode": "list",
+          "cachedResultName": "lotto_draws"
+        },
+        "where": {
+          "values": [
+            {
+              "column": "draw_round"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        -336,
+        -304
+      ],
+      "id": "26b42984-5ead-48b1-b493-2d395ab868d8",
+      "name": "단일 회차 조회",
+      "credentials": {
+        "postgres": {
+          "id": "kqM566144RNhzlSR",
+          "name": "db-lecture"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "https://www.dhlottery.co.kr/lt645/selectPstLt645Info.do",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        144,
+        -384
+      ],
+      "id": "e1ff72c6-9b52-4f68-9af6-607f23ecb2ab",
+      "name": "Fetch-최신회차1"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Fetch-최신회차",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "단일 회차 조회": {
+      "main": [
+        []
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "334005ec-4e2b-4a34-8abc-a09d6c730ed7",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "06f57ead87e05f5144d588b72ffcb2b55a96d8ab9c25ae283efe70c0d676b771"
+  },
+  "id": "bOUmQ4yMXSxoHg51",
+  "tags": []
+}
