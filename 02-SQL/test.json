@@ -1,0 +1,62 @@
+[
+    {
+        "draw_round": 1200,
+        "win_num_1": 1,
+        "win_num_2": 2,
+        "win_num_3": 4,
+        "win_num_4": 16,
+        "win_num_5": 20,
+        "win_num_6": 32,
+        "bonus_num": 45,
+        "draw_date": "2025-11-28T15:00:00.000Z",
+        "first_prize_winners": 12,
+        "first_prize_amount": "2357299875",
+        "second_prize_winners": 80,
+        "second_prize_amount": "58932497"
+    },
+    {
+        "draw_round": 1201,
+        "win_num_1": 7,
+        "win_num_2": 9,
+        "win_num_3": 24,
+        "win_num_4": 27,
+        "win_num_5": 35,
+        "win_num_6": 36,
+        "bonus_num": 37,
+        "draw_date": "2025-12-05T15:00:00.000Z",
+        "first_prize_winners": 19,
+        "first_prize_amount": "1414555718",
+        "second_prize_winners": 84,
+        "second_prize_amount": "53326506"
+    },
+    {
+        "draw_round": 1202,
+        "win_num_1": 5,
+        "win_num_2": 12,
+        "win_num_3": 21,
+        "win_num_4": 33,
+        "win_num_5": 37,
+        "win_num_6": 40,
+        "bonus_num": 7,
+        "draw_date": "2025-12-12T15:00:00.000Z",
+        "first_prize_winners": 14,
+        "first_prize_amount": "1920410813",
+        "second_prize_winners": 109,
+        "second_prize_amount": "41109712"
+    },
+    {
+        "draw_round": 1205,
+        "win_num_1": 1,
+        "win_num_2": 4,
+        "win_num_3": 16,
+        "win_num_4": 23,
+        "win_num_5": 31,
+        "win_num_6": 41,
+        "bonus_num": 2,
+        "draw_date": "2026-01-02T15:00:00.000Z",
+        "first_prize_winners": 10,
+        "first_prize_amount": "3226386263",
+        "second_prize_winners": 97,
+        "second_prize_amount": "55436191"
+    }
+]
