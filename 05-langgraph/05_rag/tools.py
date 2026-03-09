@@ -1,6 +1,6 @@
 # tools.py
 from langchain.tools import tool
-
+from vectorstore import retriever
 
 @tool
 def retrieve_blog_posts(query: str) -> str:
