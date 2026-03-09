@@ -1,4 +1,7 @@
 # graph.py
+from dotenv import load_dotenv
+load_dotenv()
+
 from langgraph.graph import StateGraph, START, END, MessagesState
 from langgraph.prebuilt import ToolNode, tools_condition
 
