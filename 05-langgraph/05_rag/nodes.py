@@ -21,7 +21,6 @@ def generate_query_or_respond(state: MessagesState):
 def rewrite_question(state: MessagesState):
     """사용자 질문을 재 작성"""
     messages = state['messages']
-    # TODO: 나중에 전체 맥락을 이해하고 질문을 정제하는 것으로 바꾸기
     question = messages[0].content
     prompt = REWRITE_QUESTION_PROMPT.format(original_question=question)
     response = res_llm.invoke(prompt)
