@@ -7,4 +7,4 @@ def check_files(state: State):
     if files:
         return 'upload'
     else:
-        return 'deep_agent'
+        return 'run_deep_agent'

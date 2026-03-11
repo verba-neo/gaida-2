@@ -1,7 +1,6 @@
 {
     "graphs": {
-        "main_agent": "./app.py:graph",
-        "deep_agent": "./app.py:deep_agent"
+        "main_agent": "./app.py:graph"
     },
     "env": "./.env",
     "python_version": "3.13",
