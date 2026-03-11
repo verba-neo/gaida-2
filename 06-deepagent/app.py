@@ -31,7 +31,7 @@ workflow.add_conditional_edges(
         'deep_agent': 'deep_agent'
     }
 )
-workflow.add_edge('upload', 'deep_agent')
+workflow.add_edge('upload', END)
 workflow.add_edge('deep_agent', END)
 
 graph = workflow.compile()
