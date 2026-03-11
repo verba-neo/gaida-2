@@ -11,8 +11,6 @@ app = FastAPI()
 # localhost:2024/slack/webhook
 @app.post('/slack/webhook')
 async def slack_webhook(req: Request):
-    from pprint import pprint
-    print('--------------------------')
     payload = await req.json()
     text = payload['event'].get('text', '')
     files_info = payload['event'].get('files', [])
@@ -24,12 +22,22 @@ async def slack_webhook(req: Request):
                 'link': file['url_private_download']
             }
         )
-    print(text, files)
     
-    print('--------------------------')
+    result = graph.ainvoke({
+        'messages': [HumanMessage(content=text)],
+        'files': files
+    })
     return {'ok': True}
 
-    # 최초 등록 때만 쓰는 코드
+    # 최초 slack 웹훅 등록 때만 쓰는 코드
     # return {'challenge': payload['challenge']}
+
+
+'''
+files: {
+    'name': 'sales.csv'
+    'link': 'download link'
+}
+'''
 
 
