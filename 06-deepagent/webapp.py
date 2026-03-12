@@ -20,17 +20,19 @@ async def slack_webhook(req: Request, background_tasks: BackgroundTasks):
 
     payload = await req.json()
 
-    # 1️⃣ Slack URL verification (제일 먼저)
+    # Slack URL verification (제일 먼저)
     if payload.get("type") == "url_verification":
         return {"challenge": payload["challenge"]}
 
-    # 2️⃣ Slack retry 방지
+    # Slack retry 방지
     if req.headers.get("x-slack-retry-num"):
         return {"ok": True}
 
     event = payload.get("event", {})
 
-    # 3️⃣ 쓸데없는 이벤트 컷
+    print(event)
+
+    # 쓸데없는 이벤트 컷
     if event.get("type") != "app_mention":
         return {"ok": True}
 
@@ -45,7 +47,7 @@ async def slack_webhook(req: Request, background_tasks: BackgroundTasks):
             "link": file["url_private_download"]
         })
 
-    # 4️⃣ agent 실행
+    # agent 실행
     background_tasks.add_task(run_agent, text, files)
 
     return {"ok": True}
